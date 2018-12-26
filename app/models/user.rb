@@ -2,7 +2,8 @@ class User < ApplicationRecord
   include ActionView::Helpers::NumberHelper
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :token_authenticatable
   enum role: %i(admin employer employee)
 
   before_validation :format_mobile
