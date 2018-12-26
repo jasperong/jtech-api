@@ -1,13 +1,10 @@
-module Types
-  class QueryType < Types::BaseObject
-    # Add root-level fields here.
-    # They will be entry points for queries on your schema.
+class Types::QueryType < Types::BaseObject
+  field :users, [Types::UserType], null: true do
+    description 'Finds a list of users based on ids'
+    argument :ids, [ID], required: true
+  end
 
-    # TODO: remove me
-    field :test_field, String, null: false,
-      description: "An example field added by the generator"
-    def test_field
-      "Hello World!"
-    end
+  def users(ids:)
+    User.where(id: ids)
   end
 end
