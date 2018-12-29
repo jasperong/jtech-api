@@ -7,7 +7,11 @@ class Mutations::CreateUser < GraphQL::Schema::Mutation
   field :error, [String], null: true
 
   def resolve(fields:)
-    user = User.new(fields)
-    user.save ? user : user.errors.full_messages
+    user = User.new(fields.to_h)
+    if user.save
+      { user: user, error: nil }
+    else
+      { user: nil, error: user.errors.full_messages.uniq }
+    end
   end
 end

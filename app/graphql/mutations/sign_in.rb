@@ -12,9 +12,9 @@ class Mutations::SignIn < GraphQL::Schema::Mutation
     return 'Email is not registered' if !user
 
     if user&.valid_password?(password)
-      user
+      { user: user, error: nil }
     else
-      'Password is incorrect'
+      { user: nil, error: 'Password is incorrect' }
     end
   end
 end

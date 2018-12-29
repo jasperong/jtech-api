@@ -5,4 +5,5 @@ class Types::UserInputType < Types::BaseInputObject
   argument :last_name,     String,    required: true
   argument :mobile,        String,    required: true
   argument :email,         String,    required: true
+  argument :role,          Integer,   required: false
 end
