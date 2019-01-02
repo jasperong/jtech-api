@@ -1,4 +1,4 @@
-class Mutations::CreateUser < GraphQL::Schema::Mutation
+class Mutations::UpdateUser < GraphQL::Schema::Mutation
   null true
 
   argument :fields, Types::UserInputType, required: true
@@ -7,11 +7,11 @@ class Mutations::CreateUser < GraphQL::Schema::Mutation
   field :error, [String], null: true
 
   def resolve(fields:)
-    user = User.new(fields.to_h)
-    if user.save
+    user = User.find_by(id: fields['id']) || context[:current_user]
+    if user.update(fields.to_h)
       { user: user, error: nil }
     else
       { user: nil, error: user.errors.full_messages.uniq }
     end
   end
-end 
+end
