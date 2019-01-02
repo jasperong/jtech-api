@@ -33,7 +33,9 @@ class User < ApplicationRecord
   end
 
   def format_mobile
-    self.mobile = read_attribute(:mobile).gsub(/[-() ]/, '') if read_attribute(:mobile).present?
+    if read_attribute(:mobile).present?
+      self.mobile = read_attribute(:mobile).gsub(/[-() ]/, '')
+    end
   end
 
   def uniq_mobile
