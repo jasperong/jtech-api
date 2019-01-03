@@ -1,5 +1,5 @@
-class Types::UserInputType < Types::BaseInputObject
-  description 'User input attributes'
+class Types::OfficeInputType < Types::BaseInputObject
+  description 'Office input attributes'
 
   argument :street_address,    String,    required: true
   argument :city,              String,    required: true

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2019-01-02
+  user_id: one
+  office_id: one
+  status: 1
+  fare: 
+
+two:
+  date: 2019-01-02
+  user_id: two
+  office_id: two
+  status: 1
+  fare: 

@@ -1,6 +1,6 @@
 class Types::OfficeType < Types::BaseObject
   field :id,                         ID,            null: false
-  field :street_address              String,        null: false
+  field :street_address,             String,        null: false
   field :city,                       String,        null: false
   field :address,                    String,        null: false
   field :alias,                      String,        null: false
@@ -9,4 +9,4 @@ class Types::OfficeType < Types::BaseObject
   def address
     object.address
   end
-end
+end 

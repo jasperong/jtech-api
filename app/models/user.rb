@@ -4,7 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :token_authenticatable
+
   enum role: %i(admin employer employee)
+
+  belongs_to :office
+  has_many   :services
 
   before_validation :format_mobile
   before_validation :capitalize_name
@@ -24,6 +28,10 @@ class User < ApplicationRecord
 
   def mobile
     number_to_phone(read_attribute(:mobile))
+  end
+
+  def current_service
+    services.where(date: Date.today)
   end
 
   private
