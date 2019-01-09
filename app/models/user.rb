@@ -7,7 +7,6 @@ class User < ApplicationRecord
 
   enum role: %i(admin employer employee)
 
-  belongs_to :office
   has_many   :services
 
   before_validation :format_mobile
