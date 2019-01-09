@@ -1,7 +1,39 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
+
+user_ids   = []
+office_ids = []
+
+def create_user(role)
+  user = User.create(email: Faker::Internet.email,
+                first_name: Faker::Name.first_name,
+                last_name: Faker::Name.last_name,
+                    mobile: Faker::Number.number(10),
+                      role: role,
+                  password: '123123123',
+    password_confirmation: '1231123123')
+  user_ids << user.id if user.employee?
+end
+
+def create_office
+  office = Office.create(
+    street_adress: Faker::Address.street_adress,
+             city: Faker::Address.city,
+            alias: Faker::ParksAndRec.city,
+       contact_no: Faker::Number.number(10))
+    office_ids << office.id
+end
+
+def create_service
+  date = Faker::Date.between(1.month.ago, 1.month.from_now)
+  Service.create(date: date,
+              user_id: user_ids[rand(user_ids.length)],
+            office_id: office_ids[rand(office_ids.length)],
+               status: date.today? rand(1..2) : 0,
+                fare: Faker::Number.decimal(2).to_f)
+end
+
+create_user(0)
+create_user(1)
+15.times { create_user(2) }
+10.times { create_office  }
+30.times { create_service }
