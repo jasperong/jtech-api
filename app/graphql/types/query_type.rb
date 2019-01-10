@@ -4,8 +4,13 @@ class Types::QueryType < Types::BaseObject
     argument :ids, [ID], required: true
   end
 
-  field :offices,   [Types::OfficeType], null: true
-  field :locations, [String],            null: true
+  field :all_employees, Types::AllEmployeesType,   null: true do
+    description 'Finds a list of employees'
+    argument :page, Integer, required: true
+  end
+
+  field :offices,       [Types::OfficeType], null: true
+  field :locations,     [String],            null: true
 
   # field :services, [Types::ServiceType], null: true do
   #   description 'Finds a list of services based on params'
@@ -13,7 +18,11 @@ class Types::QueryType < Types::BaseObject
   # end
 
   def users(ids:)
-    User.where(id: ids)
+    ids ? User.where(id: ids) : User.all
+  end
+
+  def all_employees(page:)
+    { current_page: page }
   end
 
   def offices
