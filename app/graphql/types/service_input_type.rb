@@ -1,9 +1,9 @@
 class Types::ServiceInputType < Types::BaseInputObject
   description 'Service input attributes'
 
-  argument :date,          Types::DateTimeType,    required: true
-  argument :user_id,       Integer,                required: true
-  argument :office_id,     Integer,                required: true
-  argument :status,        Integer,                required: true
+  argument :date,          Types::DateType,    required: false
+  argument :user_id,       Integer,                required: false
+  argument :office_id,     Integer,                required: false
+  argument :status,        Integer,                required: false
   argument :fare,          Float,                  required: false
 end

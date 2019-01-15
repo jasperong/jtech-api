@@ -27,7 +27,7 @@ class Seed
   end
 
   def create_service
-    date = Faker::Date.between(1.month.ago, 1.month.from_now)
+    date = Date.today
     Service.create(date: date,
                 user_id: @user_ids[rand(@user_ids.length)],
               office_id: @office_ids[rand(@office_ids.length)],
