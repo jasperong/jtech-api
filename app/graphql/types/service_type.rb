@@ -4,7 +4,14 @@ class Types::ServiceType < Types::BaseObject
   field :employee,         Types::UserType,            null: false
   field :office,           Types::OfficeType,          null: false
   field :status,           String,                     null: false
-  field :fare,             Float,                      null: false
+  field :fare,             Float,                      null: true
+  field :contact_name,     String,                     null: true
+  field :contact_no,       String,                     null: true
+  field :work_requested,   String,                     null: true
+  field :work_done,        String,                     null: true
+  field :ticket_no,        String,                     null: true
+  field :start_time,       Types::DateTimeType,        null: true
+  field :end_time,       Types::DateTimeType,        null: true
 
   def employee
     object.user

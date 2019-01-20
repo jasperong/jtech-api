@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_02_215443) do
+ActiveRecord::Schema.define(version: 2019_01_20_192515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,10 +28,16 @@ ActiveRecord::Schema.define(version: 2019_01_02_215443) do
     t.date "date"
     t.bigint "user_id"
     t.bigint "office_id"
-    t.integer "status", default: 0  
+    t.integer "status", default: 0
     t.money "fare", scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "contact_name"
+    t.text "work_requested"
+    t.text "work_done"
+    t.string "ticket_no"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.index ["office_id"], name: "index_services_on_office_id"
     t.index ["user_id"], name: "index_services_on_user_id"
   end
