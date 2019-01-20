@@ -4,6 +4,11 @@ class Types::QueryType < Types::BaseObject
     argument :ids, [ID], required: true
   end
 
+  field :user, Types::UserType, null: true do
+    description 'Finds a user based on id'
+    argument :id, ID, required: true
+  end
+
   field :all_employees, Types::AllEmployeesType,   null: true do
     description 'Finds a list of employees'
     argument :page, Integer, required: true
@@ -18,8 +23,14 @@ class Types::QueryType < Types::BaseObject
     argument :page,   Integer,                 required: true
   end
 
+  field :current_user, Types::UserType, null: true
+
   def users(ids:)
     ids ? User.where(id: ids) : User.all
+  end
+
+  def user(id:)
+    User.find_by(id: id)
   end
 
   def all_employees(page:)
@@ -40,5 +51,9 @@ class Types::QueryType < Types::BaseObject
     else
       { services: Service.where(params.to_h), current_page: page}
     end
+  end
+
+  def current_user
+    context[:current_user] || { authentication_token: nil }
   end
 end

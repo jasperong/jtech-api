@@ -1,12 +1,12 @@
 class Types::UserType < Types::BaseObject
-  field :id,                         ID,                        null: false
-  field :email,                      String,                    null: false
-  field :first_name,                 String,                    null: false
-  field :last_name,                  String,                    null: false
-  field :full_name,                  String,                    null: false
-  field :mobile,                     String,                    null: false
-  field :authentication_token,       String,                    null: false
-  field :current_service,            Types::ServiceType,        null: false
+  field :id,                         ID,                        null: true
+  field :email,                      String,                    null: true
+  field :first_name,                 String,                    null: true
+  field :last_name,                  String,                    null: true
+  field :full_name,                  String,                    null: true
+  field :mobile,                     String,                    null: true
+  field :authentication_token,       String,                    null: true
+  field :current_service,            Types::ServiceType,        null: true
   field :current_page,               Integer,                   null: true
   field :total_count,                Integer,                   null: true
 
