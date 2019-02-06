@@ -30,7 +30,7 @@ class User < ApplicationRecord
   end
 
   def current_service
-    services.where(date: Date.today).last
+    services.online.where(date: Date.today).last
   end
 
   private

@@ -14,4 +14,4 @@ class Mutations::CreateUser < GraphQL::Schema::Mutation
       { user: nil, error: user.errors.full_messages.uniq }
     end
   end
-end 
+end

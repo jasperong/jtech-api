@@ -3,7 +3,7 @@ class Mutations::CreateService < GraphQL::Schema::Mutation
 
   argument :fields, Types::ServiceInputType, required: true
 
-  field :office, Types::ServiceType, null: true
+  field :service, Types::ServiceType, null: true
   field :error, [String], null: true
 
   def resolve(fields:)

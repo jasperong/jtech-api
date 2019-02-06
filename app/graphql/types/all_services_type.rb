@@ -5,7 +5,7 @@ class Types::AllServicesType < Types::BaseObject
   field :per_page,              Integer,               null: true
 
   def services
-    object[:services]
+    object[:services].limit(per_page).offset(per_page * current_page)
   end
 
   def total_count

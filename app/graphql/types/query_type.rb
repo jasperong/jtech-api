@@ -23,6 +23,11 @@ class Types::QueryType < Types::BaseObject
     argument :page,   Integer,                 required: true
   end
 
+  field :service, Types::ServiceType, null: true do
+    description 'Finds a service based on ID'
+    argument :fields, Types::ServiceInputType, required: true
+  end
+
   field :current_user, Types::UserType, null: true
 
   def users(ids:)
@@ -51,6 +56,12 @@ class Types::QueryType < Types::BaseObject
     else
       { services: Service.where(params.to_h), current_page: page}
     end
+  end
+
+  def service(fields:)
+    _fields = fields.to_h
+    _fields.merge!(user_id: context[:current_user]&.id) if _fields[:id].nil?
+    Service.find_by(_fields)
   end
 
   def current_user

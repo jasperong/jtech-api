@@ -5,8 +5,9 @@ class Types::OfficeType < Types::BaseObject
   field :address,                    String,        null: false
   field :alias,                      String,        null: false
   field :contact_no,                 String,        null: false
+  field :contact_name,               String,        null: false
 
   def address
     object.address
   end
-end 
+end
