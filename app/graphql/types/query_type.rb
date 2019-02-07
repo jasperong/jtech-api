@@ -28,6 +28,16 @@ class Types::QueryType < Types::BaseObject
     argument :fields, Types::ServiceInputType, required: true
   end
 
+  field :request_reset_password, String, null: true do
+    description 'Requests reset password email'
+    argument :email, String, required: true
+  end
+
+  field :reset_password, Types::UserType, null: true do
+    description 'Reset password'
+    argument :fields, Types::UserInputType, required: true
+  end
+
   field :current_user, Types::UserType, null: true
 
   def users(ids:)
@@ -62,6 +72,21 @@ class Types::QueryType < Types::BaseObject
     _fields = fields.to_h
     _fields.merge!(user_id: context[:current_user]&.id) if _fields[:id].nil?
     Service.find_by(_fields)
+  end
+
+  def request_reset_password(email:)
+    user = User.find_by(email: email)
+    return 'Email not found' if user.nil?
+    user.send_reset_password_instructions
+  end
+
+  def reset_password(fields:)
+    user = User.find_by(reset_password_token: fields[:reset_password_token])
+    user&.update(
+      password: fields[:password],
+      password_confirmation: fields[:password_confirmation]
+    )
+    user&.reload
   end
 
   def current_user
