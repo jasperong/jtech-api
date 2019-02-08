@@ -28,7 +28,7 @@ class Types::QueryType < Types::BaseObject
     argument :fields, Types::ServiceInputType, required: true
   end
 
-  field :request_reset_password, String, null: true do
+  field :request_reset_password, Boolean, null: true do
     description 'Requests reset password email'
     argument :email, String, required: true
   end
@@ -75,9 +75,10 @@ class Types::QueryType < Types::BaseObject
   end
 
   def request_reset_password(email:)
-    user = User.find_by(email: email)
-    return 'Email not found' if user.nil?
+    user = User.find_for_authentication(email: email)
+    return false if user.nil?
     user.send_reset_password_instructions
+    true
   end
 
   def reset_password(fields:)

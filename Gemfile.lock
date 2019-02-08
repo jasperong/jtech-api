@@ -66,6 +66,10 @@ GEM
       warden (~> 1.2.3)
     devise-token_authenticatable (1.0.2)
       devise (>= 4.0.0, < 4.6.0)
+    dotenv (2.6.0)
+    dotenv-rails (2.6.0)
+      dotenv (= 2.6.0)
+      railties (>= 3.2, < 6.0)
     erubi (1.8.0)
     ffi (1.9.25)
     globalid (0.4.1)
@@ -165,6 +169,7 @@ DEPENDENCIES
   byebug
   devise
   devise-token_authenticatable
+  dotenv-rails
   faker!
   graphiql-rails
   graphql

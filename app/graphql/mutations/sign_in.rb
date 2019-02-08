@@ -9,7 +9,7 @@ class Mutations::SignIn < GraphQL::Schema::Mutation
   field :error,         String,          null: true
 
   def resolve(email:, password:)
-    user = User.find_by(email: email)
+    user = User.find_for_authentication(email: email)
     return { user: nil, error: 'Email is not registered', signed_in: false } if !user
 
     if user&.valid_password?(password)
