@@ -14,6 +14,7 @@ class User < ApplicationRecord
   before_validation :generate_password
   before_validation :generate_auth_token
   after_initialize  :set_default_role
+  after_create :send_password_email
 
   validates :email,      uniqueness: true, presence: true
   validates :mobile,     presence:   true
@@ -64,5 +65,9 @@ class User < ApplicationRecord
   def generate_auth_token
     self.reset_authentication_token
     self.authentication_token_created_at = DateTime.now
+  end
+
+  def send_password_email
+    self.send_reset_password_instructions
   end
 end
