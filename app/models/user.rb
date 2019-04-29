@@ -31,7 +31,7 @@ class User < ApplicationRecord
   end
 
   def current_service
-    services.online.where(date: Date.today).last
+    services.where(status: ['online', 'in_transit'], date: Date.today).last
   end
 
   private

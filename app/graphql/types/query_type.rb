@@ -62,9 +62,9 @@ class Types::QueryType < Types::BaseObject
 
   def all_services(params: nil, page:)
     if params.empty?
-      { services: Service.all, current_page: page}
+      { services: Service.all.order(date: :desc), current_page: page}
     else
-      { services: Service.where(params.to_h), current_page: page}
+      { services: Service.where(params.to_h).order(date: :desc), current_page: page}
     end
   end
 

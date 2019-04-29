@@ -9,6 +9,7 @@ class Types::UserType < Types::BaseObject
   field :current_service,            Types::ServiceType,        null: true
   field :current_page,               Integer,                   null: true
   field :total_count,                Integer,                   null: true
+  field :role,                       String,                    null: true
 
   def current_service
     object.current_service
